@@ -1,0 +1,533 @@
+/* ============================================
+   САЙТ ЗАМОВЛЕННЯ СУШІ - CSS СТИЛІ
+   ============================================ */
+
+/* ============ ЗМІННІ КОЛЬОРІВ ============ */
+:root{
+  --accent:#e44d26;      /* Основний колір (оранжевий) */
+  --muted:#666;          /* Приглушений колір (сірий) */
+  --bg:#fafafa;          /* Фон сторінки */
+  --card:#fff;           /* Фон карток */
+}
+
+/* ============ ЗАГАЛЬНІ СТИЛІ ============ */
+*{box-sizing:border-box}  /* Включення всього в розрахунок ширини */
+body{
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; 
+  margin:0;
+  background:var(--bg);
+  color:#222;
+  scroll-behavior:smooth;  /* Плавна прокрутка при кліку на якір */
+  position:relative;
+  overflow-x:hidden
+}
+
+/* ============ ФОНОВА ПІЦА ============ */
+.background-pizza{
+  position:absolute; /* inside header */
+  top:50%;
+  right:20px;
+  transform:translateY(-50%);
+  width:420px;
+  height:420px;
+  opacity:1; /* повна видимість */
+  z-index:0;
+  pointer-events:none;
+  filter:drop-shadow(0 0 30px rgba(228, 77, 38, 0.15));
+  will-change:transform;
+  transform-origin: center center;
+  animation: rotatePizza 20s linear infinite;
+}
+
+/* Піднімаємо основний контент над фоновою піцою */
+.site-header,.container,.promos-section,.reviews-section,.contact-section,.site-footer{
+  position:relative;
+  z-index:1;
+}
+
+/* Збільшимо висоту заголовка, щоб помістити фон */
+.site-header{min-height:120px}
+
+/* ============ ANIMATION KEYFRAMES ============ */
+@keyframes rotatePizza{
+  from{ transform: translateY(-50%) rotate(0deg); }
+  to{ transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ============ ЗАГОЛОВОК ============ */
+.site-header{
+  background:linear-gradient(90deg,#fff 0,#fff0);  /* Градієнт фону */
+  padding:20px 16px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px
+}
+.header-content{text-align:center;flex:1;min-width:200px}
+.site-header h1{margin:0;font-size:2.5rem}
+.tagline{color:var(--muted);margin-top:12px;font-size:1.2rem}
+
+/* ============ НАВІГАЦІЙНЕ МЕНЮ ============ */
+.navbar{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.navbar a{
+  text-decoration:none;
+  color:#222;
+  font-weight:500;
+  font-size:1.05rem;
+  transition:color 0.3s;
+  padding:8px 12px;
+  border-radius:6px
+}
+.navbar a:hover{color:var(--accent);background:#f0f0f0}  /* Ефект наведення */
+
+/* ============ ВІДЕО ============ */
+.video-section{padding:24px 0;background:transparent}
+.video-wrap{max-width:900px;margin:0 auto;padding:0 16px}
+.video-wrap iframe{width:100%;height:480px;border-radius:10px;border:0}
+@media (max-width:520px){
+  .video-wrap iframe{height:240px}
+}
+
+/* ============ ОСНОВНИЙ КОНТЕЙНЕР ============ */
+.container{
+  display:grid;
+  grid-template-columns:1fr 380px;  /* 2 колони: меню та кошик */
+  gap:30px;
+  padding:40px;
+  max-width:1200px;
+  margin:40px auto
+}
+.menu h2,.cart h2{margin-top:0}
+
+/* ============ МЕНЮ СУШІ ============ */
+.menu-grid{display:flex;flex-wrap:wrap;gap:24px}
+.menu-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  width:280px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  display:flex;
+  flex-direction:column
+}
+.menu-card img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+.menu-card h3{margin:12px 0 6px;font-size:1.2rem;font-weight:600}
+.menu-card p{margin:0;color:var(--muted);font-size:1rem}
+.menu-card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:1.1rem}
+
+/* ============ ІНГРЕДІЄНТИ ============ */
+.ingredients-section{
+  background:#f9f9f9;
+  border-radius:8px;
+  padding:12px;
+  margin:12px 0;
+  border:1px solid #eee
+}
+.ingredients-section label{
+  display:block;
+  font-size:0.95rem;
+  font-weight:500;
+  color:#222;
+  margin-bottom:8px
+}
+.ingredients-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  max-height:120px;
+  overflow-y:auto
+}
+.ingredients-list label{
+  margin-bottom:0;
+  font-weight:400;
+  background:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid #ddd;
+  transition:0.2s
+}
+.ingredients-list label:hover{
+  border-color:var(--accent);
+  background:#fff5f0
+}
+.ingredient-checkbox{
+  cursor:pointer
+}
+
+/* ============ КНОПКИ ============ */
+.btn{
+  background:#fff;
+  border:2px solid #ddd;
+  padding:12px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:1rem;
+  transition:0.3s ease;  /* Плавна анімація */
+  color:#222;
+  position:relative;
+  overflow:hidden
+}
+.btn:before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg, #ff6b6b, #ff8c42, #ffd93d, #6bcf7f, #4d96ff, #9d84b7, #ff6b9d);
+  background-size:200% 100%;
+  z-index:-1;
+  transition:left 0.4s ease
+}
+.btn:hover:before{
+  left:0
+}
+.btn:hover{
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  transform:translateY(-2px)
+}
+.btn.primary{
+  background:linear-gradient(135deg, var(--accent), #ff6b42);
+  color:#fff;
+  border-color:var(--accent);
+  box-shadow:0 4px 15px rgba(228, 77, 38, 0.3)
+}
+.btn.primary:hover{
+  background:linear-gradient(135deg, #ff5500, #ff8c42);
+  box-shadow:0 8px 25px rgba(228, 77, 38, 0.5);
+  transform:translateY(-3px)
+}
+
+/* ============ КОШИК ============ */
+.cart{
+  background:var(--card);
+  padding:16px;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04)
+}
+.cart-list{
+  min-height:140px;
+  padding:12px;
+  border:1px dashed #eee;
+  border-radius:8px;
+  background:#fff;
+  font-size:1rem
+}
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #f4f4f4;
+  font-size:1.05rem
+}
+.cart-item:last-child{border-bottom:none}
+.cart-summary{
+  margin-top:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:1.1rem;
+  font-weight:500
+}
+
+/* ============ ФОРМА ДОСТАВКИ ============ */
+.order-form{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+.order-form label{display:flex;flex-direction:column;font-size:1rem}
+.order-form input,.order-form textarea{padding:12px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
+.hidden{display:none}  /* Прихована форма */
+
+/* ============ ФУТЕР ============ */
+/* ============ КОНТАКТНИЙ РОЗДІЛ ============ */
+.contact-section{
+  padding:40px 20px;
+  margin:40px 0;
+  background:#f9f9f9;
+}
+
+.contact-section h2{
+  text-align:center;
+  font-size:2rem;
+  margin:0 0 32px;
+  color:#222;
+}
+
+.contact-container{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+.contact-info{
+  padding:20px;
+}
+
+.phone-numbers{
+  margin-top:20px;
+}
+
+.phone-numbers h3{
+  font-size:1.3rem;
+  color:#222;
+  margin:0 0 16px;
+}
+
+.phone-numbers p{
+  font-size:1.1rem;
+  margin:12px 0;
+  color:var(--muted);
+}
+
+.phone-numbers a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:500;
+  transition:color 0.3s;
+}
+
+.phone-numbers a:hover{
+  color:#cc3c1a;
+  text-decoration:underline;
+}
+
+.map-container{
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.map-container iframe{
+  width:100%;
+  height:450px;
+  border:none;
+}
+
+@media (max-width:768px){
+  .contact-container{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  .map-container iframe{
+    height:300px;
+  }
+}
+
+.site-footer{text-align:center;color:var(--muted);padding:32px 16px;font-size:1.05rem}
+
+/* ============ АКЦІЇ ============ */
+.promos-section{
+  background:linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);  /* Теплий градієнт */
+  padding:40px 20px;
+  margin:40px 0
+}
+.promos-section h2{text-align:center;font-size:2rem;margin:0 0 32px}
+.promos-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));  /* Адаптивна сітка */
+  gap:20px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px
+}
+.promo-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-top:4px solid var(--accent);
+  transition:transform 0.2s
+}
+.promo-card:hover{
+  transform:translateY(-4px);  /* Піднімання при наведенні */
+  box-shadow:0 6px 16px rgba(0,0,0,0.15)
+}
+.promo-card h3{margin:0 0 12px;color:#222;font-size:1.2rem}
+.promo-desc{color:var(--muted);font-size:1rem;margin:8px 0}
+.promo-valid{font-size:0.95rem;color:#e44d26;font-weight:500;margin:12px 0 0}
+
+/* ============ ВІДГУКИ ============ */
+.reviews-section{background:#fefefe;padding:40px 20px;margin:40px 0}
+.reviews-section h2{text-align:center;font-size:2rem;margin:0 0 32px}
+
+/* ФОРМА ДЛЯ НАПИСАННЯ ВІДГУКУ */
+.review-form-container{
+  background:linear-gradient(135deg, #fffbf7 0%, #fff9f5 100%);
+  border-radius:12px;
+  padding:28px;
+  max-width:600px;
+  margin:0 auto 40px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05)
+}
+.review-form-container h3{margin-top:0;color:#222;font-size:1.3rem}
+.review-form{display:flex;flex-direction:column;gap:16px}
+.review-form label{display:flex;flex-direction:column;font-weight:500;color:#222;margin-bottom:6px}
+.review-form input[type="text"],
+.review-form textarea{
+  padding:12px;
+  border:2px solid #ddd;
+  border-radius:8px;
+  font-size:1rem;
+  font-family:inherit;
+  transition:border-color 0.3s
+}
+.review-form input[type="text"]:focus,
+.review-form textarea:focus{
+  outline:none;
+  border-color:var(--accent)
+}
+
+/* ЗІРКОВА РЕЙТИНГ СИСТЕМА */
+.star-rating{
+  display:flex;
+  gap:8px;
+  margin-top:8px
+}
+.star-rating input{display:none}  /* Приховуємо radio buttons */
+.star-rating label{
+  margin:0;
+  font-size:2rem;
+  color:#ddd;
+  cursor:pointer;
+  transition:color 0.2s;
+  padding:0
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label{color:#ffc107}  /* Жовтий колір при наведенні */
+.star-rating input:checked ~ label ~ label{color:#ddd}  /* Скидаємо колір для невибраних */
+
+/* КОНТЕЙНЕР ВІДГУКІВ */
+.reviews-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));  /* Адаптивна сітка */
+  gap:20px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px
+}
+.review-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  border-left:4px solid var(--accent)  /* Кольорова смужка */
+}
+.review-card .stars{color:#ffc107;font-size:1.1rem;margin-bottom:10px;letter-spacing:2px}
+.review-card .review-text{color:#333;font-size:1rem;line-height:1.6;margin:12px 0}
+.review-card .reviewer-name{font-weight:600;color:#222;margin-top:12px}
+.review-card .reviewer-info{font-size:0.9rem;color:var(--muted)}
+
+/* ============ RESPONSIVE ДИЗАЙН ============ */
+@media (max-width:900px){
+  .site-header{flex-direction:column;text-align:center}
+  .header-content{width:100%}
+  .navbar{justify-content:center;width:100%;gap:12px}
+  .container{grid-template-columns:1fr;padding:24px}  /* 1 колона на планшетах */
+  .menu-card{width:48%}  /* 2 картки в ряду */
+}
+/* ============ МОБІЛЬНІ ПРИСТРОЇ ============ */
+@media (max-width:520px){
+  .site-header h1{font-size:2rem}
+  .navbar{flex-direction:column;gap:8px}
+  .navbar a{width:100%;text-align:center}
+  .menu-card{width:100%}  /* 1 картка в ряду */
+}
+
+/* ============ МОДАЛЬНЕ ВІКНО ДЛЯ ЗОБРАЖЕНЬ ============ */
+.image-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  animation:fadeIn 0.3s ease-in
+}
+.image-modal.hidden{
+  display:none
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+.modal-content{
+  position:relative;
+  max-width:90vw;
+  max-height:90vh;
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  animation:slideUp 0.3s ease-out
+}
+@keyframes slideUp{
+  from{transform:translateY(50px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+#modalImage{
+  max-width:100%;
+  max-height:80vh;
+  width:auto;
+  height:auto;
+  border-radius:8px;
+  display:block
+}
+.modal-info{
+  margin-top:20px;
+  padding:0 10px;
+  text-align:center;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto
+}
+.modal-info h3{
+  margin:0 0 12px;
+  font-size:1.4rem;
+  color:#222
+}
+.modal-ingredients{
+  font-size:1rem;
+  color:var(--muted);
+  line-height:1.6
+}
+.modal-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:#ff4444;
+  color:#fff;
+  border:none;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  font-size:24px;
+  cursor:pointer;
+  transition:0.2s;
+  z-index:1001
+}
+.modal-close:hover{
+  background:#cc0000;
+  transform:scale(1.1)
+}
+.menu-card img{
+  cursor:zoom-in
+}
+
+/* Старий невикористаний клас */
+.img1{
+    width:50px ;
+    height: 50px;
+    padding:10px ;
+    margin: 10px;
+}
