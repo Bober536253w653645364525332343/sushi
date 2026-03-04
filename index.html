@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <!-- Адаптивний дизайн для мобільних пристроїв -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Замовлення суші</title>
+    <!-- Підключення CSS стилів -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    
+    <!-- ЗАГОЛОВОК САЙТУ З НАВІГАЦІЄЮ -->
+        <header class="site-header">
+                <div class="header-content">
+                        <h1>🍣 Замовлення суші</h1>
+                        <p class="tagline">Швидко. Смачно. Доставка.</p>
+                </div>
+                <!-- ФОНОВА ПІЦА У ЗАГОЛОВКУ -->
+                <svg class="background-pizza" viewBox="0 0 122 122" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                                <g class="whole" id="pizza">
+                                    <circle cx="61" cy="61" r="61" fill="#FFB800"/>
+                                    <circle cx="61" cy="61" r="55" fill="#FFDE31"/>
+                                    <g fill="#CD2D36" stroke="#FEA202" stroke-miterlimit="10" stroke-width="2">
+                                        <circle cx="61" cy="29.11" r="8" />
+                                        <circle cx="38.45" cy="38.45" r="8" />
+                                        <circle cx="29.11" cy="61" r="8" />
+                                        <circle cx="38.45" cy="83.55" r="8" />
+                                        <circle cx="61" cy="92.89" r="8" />
+                                        <circle cx="83.55" cy="83.55" r="8" />
+                                        <circle cx="92.89" cy="61" r="8" />
+                                        <circle cx="83.55" cy="38.45" r="8" />
+                                    </g>
+                                    <circle cx="61" cy="61" r="48.2" fill="none" stroke="#FEA202" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="16 10 8 4"/>
+                                    <circle cx="61" cy="60.8" r="8" fill="#CD2D36" stroke="#FEA202" stroke-miterlimit="10" stroke-width="2"/>
+                                </g> 
+                                <path id="sliceOutline" d="M62.94,61.63,82.68,9a2.51,2.51,0,0,0-1.41-3C72,.8,50,.8,40.63,5.9a2.46,2.46,0,0,0-1.34,3L59.06,61.63A2.07,2.07,0,0,0,62.94,61.63Z" />
+                                <mask id="pizzaMask">
+                                    <use class="pizzaMask" xlink:href="#sliceOutline" x="0%" y="0%" fill="#FFF" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>  
+                                </mask>
+                        </defs>
+                        <g mask="url(#pizzaMask)">
+                            <use xlink:href="#pizza" x="0%" y="0%"/>
+                        </g>
+                        <use class="pizzaOutline" xlink:href="#sliceOutline" x="0%" y="0%" fill="none" stroke="#FEA202" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/> 
+                </svg>
+        <!-- Навігаційне меню з якорами -->
+        <nav class="navbar">
+            <a href="#menu">Меню</a>
+            <a href="#promos">Акції</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#contact">Контакти</a>
+        </nav>
+    </header>
+
+    <!-- ВІДЕО ПРЕЗЕНТАЦІЯ -->
+    <section class="video-section">
+        <div class="video-wrap">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/tXhy97y1P6o?si=Vo73-Q3Gq7fzog7x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ: МЕНЮ ТА КОШИК -->
+    <main class="container">
+        <!-- СЕКЦІЯ МЕНЮ -->
+        <section class="menu" id="menu">
+            <h2>Меню</h2>
+            <!-- Контейнер для динамічно генерованих карток суші -->
+            <div id="menuItems" class="menu-grid">
+                <!-- Заповнюється JavaScript -->
+            </div>
+        </section>
+
+        <!-- БІЧНА ПАНЕЛЬ: КОШИК -->
+        <aside class="cart">
+            <h2>Кошик</h2>
+            <!-- Список замовлень -->
+            <div id="cartList" class="cart-list">Порожній кошик</div>
+            <!-- Сума та кнопка оформлення -->
+            <div class="cart-summary">
+                <div>Сума: <span id="total">0</span> ₴</div>
+                <!-- Кнопка активується при наявності товарів -->
+                <button id="checkoutBtn" class="btn" disabled>Оформити замовлення</button>
+            </div>
+
+            <!-- ФОРМА ДОСТАВКИ (спочатку прихована) -->
+            <form id="orderForm" class="order-form hidden">
+                <h3>Деталі доставки</h3>
+                <label>Ім'я<input type="text" id="name" required /></label>
+                <label>Телефон<input type="tel" id="phone" required /></label>
+                <label>Адреса<textarea id="address" rows="2" required></textarea></label>
+                <button type="submit" class="btn primary">Підтвердити замовлення</button>
+            </form>
+        </aside>
+    </main>
+
+    <!-- СЕКЦІЯ СПЕЦІАЛЬНИХ ПРОПОЗИЦІЙ -->
+    <section class="promos-section" id="promos">
+        <h2>🎉 Спеціальні пропозиції</h2>
+        <!-- Контейнер для акцій -->
+        <div class="promos-grid" id="promosList">
+            <!-- Заповнюється JavaScript -->
+        </div>
+    </section>
+
+    <!-- СЕКЦІЯ ВІДГУКІВ КЛІЄНТІВ -->
+    <section class="reviews-section" id="reviews">
+        <h2>Відгуки клієнтів</h2>
+        
+        <!-- ФОРМА ДЛЯ НАПИСАННЯ НОВОГО ВІДГУКУ -->
+        <div class="review-form-container">
+            <h3>Залиште свій відгук</h3>
+            <form id="reviewForm" class="review-form">
+                <label>Ваше ім'я
+                    <input type="text" id="reviewName" placeholder="Ім'я" required />
+                </label>
+                
+                <label>Рейтинг (зірки)
+                    <div class="star-rating">
+                        <input type="radio" name="rating" value="1" id="star1" />
+                        <label for="star1">★</label>
+                        <input type="radio" name="rating" value="2" id="star2" />
+                        <label for="star2">★</label>
+                        <input type="radio" name="rating" value="3" id="star3" />
+                        <label for="star3">★</label>
+                        <input type="radio" name="rating" value="4" id="star4" />
+                        <label for="star4">★</label>
+                        <input type="radio" name="rating" value="5" id="star5" checked />
+                        <label for="star5">★</label>
+                    </div>
+                </label>
+                
+                <label>Ваш відгук
+                    <textarea id="reviewText" placeholder="Що вам сподобалось або не сподобалось?" required rows="4"></textarea>
+                </label>
+                
+                <button type="submit" class="btn primary">Відправити відгук</button>
+            </form>
+        </div>
+        
+        <!-- Контейнер для відгуків -->
+        <div class="reviews-grid" id="reviewsList">
+            <!-- Заповнюється JavaScript -->
+        </div>
+    </section>
+
+    <!-- СЕКЦІЯ КОНТАКТІВ З КАРТОЮ -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Контакти</h2>
+                <div class="phone-numbers">
+                    <h3>📞 Номери телефонів</h3>
+                    <p><a href="tel:+380XX-XXX-XXXX">+38 0XX-XXX-XXXX</a></p>
+                    <p><a href="tel:+380XX-XXX-XXXX">+38 0XX-XXX-XXXX</a></p>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3071.0732735034317!2d24.719302794053743!3d48.924331168644315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4730c16c8faa780f%3A0x8d5ae804b2dc555a!2sUrban%20Space%20100!5e0!3m2!1sru!2sua!4v1772642653876!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- ФУТЕР З КОНТАКТНОЮ ІНФОРМАЦІЄЮ -->
+    <footer class="site-footer">
+        © 2026 Суші. Всі права не захищені 😉</footer>
+
+    <!-- МОДАЛЬНЕ ВІКНО ДЛЯ ПЕРЕГЛЯДУ ЗОБРАЖЕНЬ -->
+    <div id="imageModal" class="image-modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">✕</button>
+            <img id="modalImage" src="" alt="Збільшене зображення" />
+            <div class="modal-info">
+                <h3 id="modalName"></h3>
+                <div id="modalIngredients" class="modal-ingredients"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Підключення JavaScript скрипту -->
+    <script src="script.js"></script>
+</body>
+</html>
